@@ -144,7 +144,7 @@ function App() {
                 </Toolbar>
             </AppBar>
 
-            <Container fixed style={{padding: "5px", margin: "5px"}}>
+            <Container fixed style={{padding: "3px", margin:"0 10px"}}>
                 <Grid container style={{padding: "20px"}}>
                     <AddItemForm addItem={addTodoList}/>
                 </Grid>
