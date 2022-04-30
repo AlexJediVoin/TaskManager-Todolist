@@ -1,15 +1,19 @@
+import {Button} from "@material-ui/core";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {IconButton, TextField} from "@mui/material";
+import {AddBox} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (itemTitle: string) => void
 }
-export function AddItemForm (props:AddItemFormPropsType) {
+
+export function AddItemForm(props: AddItemFormPropsType) {
     let [titleList, setTitle] = useState("");
     let [error, setError] = useState<string | null>(null);
     const onChangeSetTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value);
     }
-    const onKeyPressAddItem= (e: KeyboardEvent<HTMLInputElement>) => {
+    const onKeyPressAddItem = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
         if (e.charCode === 13) {
             addItem();
@@ -25,13 +29,17 @@ export function AddItemForm (props:AddItemFormPropsType) {
         }
     }
     return (<div>
-            <input value={titleList}
-                   onChange={onChangeSetTitle}
-                   onKeyPress={onKeyPressAddItem}
-                   className={error ? "error" : ''}
+            <TextField variant={"outlined"}
+                       value={titleList}
+                       onChange={onChangeSetTitle}
+                       onKeyPress={onKeyPressAddItem}
+                       error={!!error}
+                       label={'Title'}
+                       helperText={error}
             />
-            <button onClick={addItem}>+</button>
-            {error && <div className={"error_message"}>Заполни строку!</div>}
+            <IconButton color={"primary"} onClick={addItem}>
+                <AddBox/>
+            </IconButton>
         </div>
     )
 }

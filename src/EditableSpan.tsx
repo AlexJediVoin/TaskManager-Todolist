@@ -1,11 +1,12 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {TextField} from "@mui/material";
 
 type EditableSpanPropsType = {
     title: string
     changeTitle: (title: string) => void
 }
 
-const EditableSpan = (props:EditableSpanPropsType) => {
+const EditableSpan = (props: EditableSpanPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false);
     let [title, setTitle] = useState(props.title);
     const onEditMode = () => setEditMode(true);
@@ -25,7 +26,7 @@ const EditableSpan = (props:EditableSpanPropsType) => {
         <React.Fragment>
             {
                 editMode
-                    ? <input
+                    ? <TextField
                         value={title}
                         autoFocus={true}
                         onBlur={offEditMode}
