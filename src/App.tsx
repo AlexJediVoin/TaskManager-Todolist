@@ -83,7 +83,7 @@ function App() {
         setTasks({...tasks})
     }
 
-    const changeFilter = (value: FilterValuesType, todoListId: string) => {
+    const changeTodolistFilter = (value: FilterValuesType, todoListId: string) => {
         let todolist = todoLists.find(tl => tl.id === todoListId);
         if (todolist) {
             todolist.filter = value;
@@ -170,7 +170,7 @@ function App() {
                                         removeTodolist={removeTodolist}
                                         removeTask={removeTask}
                                         addTask={addTask}
-                                        changeFilter={changeFilter}
+                                        changeTodolistFilter={changeTodolistFilter}
                                         changeTaskStatus={changeTaskStatus}
                                         filter={tl.filter}
                                         changeTaskTitle={changeTaskTitle}
