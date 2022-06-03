@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import './App.css';
+import './AppWithRedux.module.css';
+/*
 import {TaskType, TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
@@ -185,5 +186,6 @@ function App() {
         </div>
     );
 }
+*/
 
-export default App;
+/*export default App;*/
