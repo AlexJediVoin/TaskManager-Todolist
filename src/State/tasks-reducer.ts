@@ -1,6 +1,6 @@
-import {TaskStateType} from "../AppWithRedux";
 import {v1} from "uuid";
 import {AddTodolistAType, RemoveTodolistAType, todoListId1, todoListId2} from "./todolists-reducer";
+import {TaskStateType} from "../Components/AppWithRedux/AppWithRedux";
 
 type AddTaskAType =
     {
@@ -54,13 +54,13 @@ type ActionType =
 const InitialState: TaskStateType = {
     [todoListId1]:
         [
-            {id: v1(), title: "HTML&&CSS", isDone: true},
+           /* {id: v1(), title: "HTML&&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "ReactJS", isDone: false}
+            {id: v1(), title: "ReactJS", isDone: false}*/
         ],
     [todoListId2]: [
-        {id: v1(), title: "Milk", isDone: true},
-        {id: v1(), title: "React book", isDone: true}
+        /*{id: v1(), title: "Milk", isDone: true},
+        {id: v1(), title: "React book", isDone: true}*/
     ]
 };
 

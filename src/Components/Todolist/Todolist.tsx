@@ -1,10 +1,10 @@
 import React, {useCallback} from 'react';
-import {AddItemForm} from "./AddItemForm";
-import EditableSpan from "./EditableSpan";
 import {Delete} from "@mui/icons-material";
 import {Button, Checkbox, IconButton} from "@material-ui/core";
-import {FilterValuesType, TodoListType} from "./AppWithRedux";
-import { Task } from './Task';
+import {Task} from './../Task/Task';
+import {FilterValuesType} from "../AppWithRedux/AppWithRedux";
+import EditableSpan from "../EditableSpan/EditableSpan";
+import {AddItemForm} from "../AddItemForm/AddItemForm";
 
 export type TaskType = {
     id: string
@@ -37,7 +37,7 @@ export const Todolist = React.memo((props: PropsType) => {
     }
     const changeTodolistTitle = useCallback((title: string) => {
         props.changeTodolistTitle(props.id, title);
-    },[props.changeTodolistTitle,props.id])
+    }, [props.changeTodolistTitle, props.id])
 
     const onAllClickHandler = useCallback(() => {
         props.changeFilter("all", props.id)
@@ -60,14 +60,14 @@ export const Todolist = React.memo((props: PropsType) => {
         </h3>
         <AddItemForm addItem={addTask}/>
         <div>
-              {
-                  tasksForTodolist.map(t =>
-                      <Task key={t.id} todolistId={props.id} task={t}
-                            removeTask={props.removeTask}
-                            changeTaskStatus={props.changeTaskStatus}
-                            changeTaskTitle={props.changeTaskTitle}/>
-               )
-              }
+            {
+                tasksForTodolist.map(t =>
+                    <Task key={t.id} todolistId={props.id} task={t}
+                          removeTask={props.removeTask}
+                          changeTaskStatus={props.changeTaskStatus}
+                          changeTaskTitle={props.changeTaskTitle}/>
+                )
+            }
 
         </div>
         <div style={{paddingTop: "10px"}}>

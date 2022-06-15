@@ -1,5 +1,6 @@
-import {FilterValuesType, TodoListType} from "../AppWithRedux";
+
 import {v1} from "uuid";
+import {FilterValuesType, TodoListType} from "../Components/AppWithRedux/AppWithRedux";
 
 export type AddTodolistAType =
     {
@@ -50,7 +51,7 @@ export const todoListId2:string = v1();
 
 const InitialState: Array<TodoListType> =
 [
-    {
+    /*{
         id: todoListId1,
         title: "What to learn",
         filter: 'all'
@@ -59,7 +60,7 @@ const InitialState: Array<TodoListType> =
         id: todoListId2,
         title: "What to buy",
         filter: 'all'
-    }
+    }*/
 ];
 
 export const todolistsReducer = (state = InitialState, action: ActionType): Array<TodoListType> => {

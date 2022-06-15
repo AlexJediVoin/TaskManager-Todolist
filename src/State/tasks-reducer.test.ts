@@ -1,9 +1,9 @@
-import {TaskStateType} from "../AppWithRedux";
-
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
 import {addTodolistAC, removeTodolistAC} from "./todolists-reducer";
+import {TaskStateType} from "../Components/AppWithRedux/AppWithRedux";
+import {TaskType} from "../Components/Todolist/Todolist";
 
-let startState: TaskStateType ;
+let startState: TaskStateType;
 
 beforeEach(() => {
     startState = {
@@ -37,7 +37,7 @@ test('correct task should be removed to correct array', () => {
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId2"].length).toBe(2);
-    expect(endState["todolistId2"].every(t => t.id !== "3")).toBeTruthy()
+    expect(endState["todolistId2"].every((t: TaskType) => t.id !== "3")).toBeTruthy()
     expect(endState["todolistId2"][0].title).toBe("bread");
     expect(endState["todolistId2"][1].isDone).toBe(true);
 
@@ -71,7 +71,7 @@ test('status of specified task should be changed', () => {
         "todolistId2": [
             {id: "1", title: "bread", isDone: false},
             {id: "2", title: "milk", isDone: true},
-            {id: "3", title: "tea", isDone: true}
+            {id: "3", title: "tea", isDone: false}
         ]
     });
     expect(endState2).toEqual({

@@ -1,8 +1,10 @@
 import React, {ChangeEvent, useCallback} from "react";
 import {Checkbox, IconButton} from "@material-ui/core";
-import EditableSpan from "./EditableSpan";
+import styles from './../AppWithRedux/AppWithRedux.module.css'
 import {Delete} from "@mui/icons-material";
-import {TaskType} from "./Todolist";
+import {TaskType} from "../Todolist/Todolist";
+import EditableSpan from "../EditableSpan/EditableSpan";
+
 
 type TaskPropsType = {
     todolistId: string
@@ -24,7 +26,7 @@ export const Task = React.memo((props: TaskPropsType) => {
         props.changeTaskTitle(props.task.id, newValue, props.todolistId);
     }, [props.changeTaskTitle, props.task.id, props.todolistId]);
 
-    return <div key={props.task.id} className={props.task.isDone ? "is-done" : ""}>
+    return <div key={props.task.id} className={props.task.isDone ? styles.isDone : ""}>
         <Checkbox
             checked={props.task.isDone}
             color="primary"
