@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {action} from "@storybook/addon-actions";
 import {Task} from "./Task";
+import {TaskStatuses, TodoTaskPriorities} from "../../api/tasks-api";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -23,8 +24,24 @@ export const TaskIsDoneStory = Template.bind({});
 export const TaskIsNotDoneStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 TaskIsDoneStory.args = {
-  task: {id: "12" , isDone:true, title:"JS"},
-};
+  task: {id: "12" , title: 'JS', status: TaskStatuses.Completed,
+    addedDate: new Date(),
+    completed: false,
+    order: 0,
+    priority: TodoTaskPriorities.Low,
+    startDate: new Date(),
+    deadline: new Date(),
+    description: 'New task',
+    todoListId: 'dsds',
+}}
 TaskIsNotDoneStory.args = {
-  task: {id: "125" , isDone:false, title:"CSS"},
-};
+  task: {id: "125" , title: 'CSS', status: TaskStatuses.New,
+    addedDate: new Date(),
+    completed: false,
+    order: 0,
+    priority: TodoTaskPriorities.Low,
+    startDate: new Date(),
+    deadline: new Date(),
+    description: 'New task',
+    todoListId: 'todolistId2',
+}};
