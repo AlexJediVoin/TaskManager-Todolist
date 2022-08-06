@@ -29,45 +29,45 @@ const initialGlobalState: AppRootStateType = {
         ['todolistId1']: [
             {
                 id: v1(), title: 'REDUX', status: TaskStatuses.Completed,
-                addedDate: new Date(),
+                addedDate: " ",
                 completed: false,
                 order: 0,
                 priority: TodoTaskPriorities.Low,
-                startDate: new Date(),
-                deadline: new Date(),
+                startDate: " ",
+                deadline: " ",
                 description: 'New task',
                 todoListId: 'todolistId1'
             },
             {
                 id: v1(), title: 'NODE.JS', status: TaskStatuses.Completed,
-                addedDate: new Date(),
+                addedDate: " ",
                 completed: false,
                 order: 0,
                 priority: TodoTaskPriorities.Low,
-                startDate: new Date(),
-                deadline: new Date(),
+                startDate: " ",
+                deadline: " ",
                 description: 'New task',
                 todoListId: 'todolistId1'
             }
         ],
         ['todolistId2']: [
             {id: v1(), title: 'Milk', status: TaskStatuses.Completed,
-                addedDate: new Date(),
+                addedDate: " ",
                 completed: false,
                 order: 0,
                 priority: TodoTaskPriorities.Low,
-                startDate: new Date(),
-                deadline: new Date(),
+                startDate: " ",
+                deadline: " ",
                 description: 'New task',
                 todoListId: 'todolistId2'
             },
             {id: v1(), title: 'React Book', status: TaskStatuses.Completed,
-                addedDate: new Date(),
+                addedDate: " ",
                 completed: false,
                 order: 0,
                 priority: TodoTaskPriorities.Low,
-                startDate: new Date(),
-                deadline: new Date(),
+                startDate: " ",
+                deadline: " ",
                 description: 'New task',
                 todoListId: 'todolistId2'
             }

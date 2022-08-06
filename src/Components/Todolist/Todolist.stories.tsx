@@ -33,23 +33,23 @@ TodolistFilterComplete.args = {
     tasks: [
         {
             id: v1(), title: 'HTML&CSS', status: TaskStatuses.New,
-            addedDate: new Date(),
+            addedDate: " ",
             completed: false,
             order: 0,
             priority: TodoTaskPriorities.Low,
-            startDate: new Date(),
-            deadline: new Date(),
+            startDate: " ",
+            deadline: " ",
             description: 'New task',
             todoListId: ''
         },
         {
             id: v1(), title: 'JS', status: TaskStatuses.Completed,
-            addedDate: new Date(),
+            addedDate: " ",
             completed: false,
             order: 0,
             priority: TodoTaskPriorities.Low,
-            startDate: new Date(),
-            deadline: new Date(),
+            startDate: " ",
+            deadline: " ",
             description: 'New task',
             todoListId: ''
         }
@@ -63,23 +63,23 @@ TodolistFilterActive.args = {
     tasks: [
         {
             id: v1(), title: 'REDUX', status: TaskStatuses.Completed,
-            addedDate: new Date(),
+            addedDate: " ",
             completed: false,
             order: 0,
             priority: TodoTaskPriorities.Low,
-            startDate: new Date(),
-            deadline: new Date(),
+            startDate: " ",
+            deadline: " ",
             description: 'New task',
             todoListId: ''
         },
         {
             id: v1(), title: 'NODE.JS', status: TaskStatuses.New,
-            addedDate: new Date(),
+            addedDate: " ",
             completed: false,
             order: 0,
             priority: TodoTaskPriorities.Low,
-            startDate: new Date(),
-            deadline: new Date(),
+            startDate: " ",
+            deadline: " ",
             description: 'New task',
             todoListId: ''
         }
