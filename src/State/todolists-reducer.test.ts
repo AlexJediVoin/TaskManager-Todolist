@@ -1,10 +1,11 @@
 import {
     addTodolistAC, changeTodolistFilterAC,
     changeTodolistTitleAC, FilterValuesType,
-    removeTodolistAC, TodolistDomainType,
+    removeTodolistAC, setTodolistsAC, TodolistDomainType,
     todolistsReducer
 } from './todolists-reducer';
 import {v1} from 'uuid';
+import {tasksReducer} from "./tasks-reducer";
 
 let todolistId1: string;
 let todolistId2: string;
@@ -16,8 +17,8 @@ beforeEach(() => {
     todolistId2 = v1();
 
     startState = [
-        {id: todolistId1, title: "What to learn", filter: "all", order: 0, addedDate: 'str1'},
-        {id: todolistId2, title: "What to buy", filter: "all", order: 0, addedDate: 'str2'}
+        {id: todolistId1, title: "What to learn", filter: "all", order: 0, addedDate: 'str1',entityStatus: 'loading'},
+        {id: todolistId2, title: "What to buy", filter: "all", order: 0, addedDate: 'str2',entityStatus: 'loading'}
     ]
 })
 
@@ -28,13 +29,25 @@ test('correct todolist should be removed', () => {
     expect(endState.length).toBe(1);
     expect(endState[0].id).toBe(todolistId2);
 });
-test('correct todolist should be added', () => {
-    let newTodolistTitle = "New Todolist";
 
-    const endState = todolistsReducer(startState, addTodolistAC(newTodolistTitle))
+test('todolist should be set to the state', () => {
+
+    const action = setTodolistsAC(startState)
+
+    const endState = todolistsReducer([],action)
+
+    expect(endState.length).toBe(2);
+});
+
+test('correct todolist should be added', () => {
+    let newTodolist=
+        {id: todolistId2, title: "What to buyttt", filter: "all", order: 0, addedDate: 'str2'}
+
+
+    const endState = todolistsReducer(startState, addTodolistAC(newTodolist))
 
     expect(endState.length).toBe(3);
-    expect(endState[2].title).toBe(newTodolistTitle);
+    expect(endState[0].title).toBe("What to buyttt");
 });
 
 test('correct todolist should change its name', () => {
@@ -53,3 +66,25 @@ test('correct filter of todolist should be changed', () => {
     expect(endState[1].filter).toBe(newFilter);
 });
 
+test ('empty arrays should be added when we set todolists',()=>{
+    const action = setTodolistsAC([
+        {
+            id: '1',
+            addedDate: '',
+            order: 0,
+            title: 'ss'
+        },
+        {
+            id: '2',
+            addedDate: '',
+            order: 0,
+            title: 'ssddd'
+        }])
+    const endState = tasksReducer({},action);
+    let keys = Object.keys(endState);
+
+    expect(keys.length).toBe(2);
+    expect(endState['1']).toStrictEqual([]);
+    expect(endState['2']).toStrictEqual([]);
+
+})

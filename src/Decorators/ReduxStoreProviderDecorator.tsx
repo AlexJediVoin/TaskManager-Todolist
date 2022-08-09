@@ -6,25 +6,31 @@ import {combineReducers, legacy_createStore as createStore} from 'redux';
 import {v1} from "uuid";
 import {AppRootStateType, store} from "../State/store";
 import {TaskStatuses, TodoTaskPriorities} from "../api/tasks-api";
+import {appReducer, RequestStatusType} from "../State/app-reducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todolists: todolistsReducer,
+    app: appReducer,
 })
 
 const initialGlobalState: AppRootStateType = {
     todolists: [
         {
             id: 'todolistId1', title: 'What to learn', filter: 'all', addedDate: '',
-            order: 0
+            order: 0,entityStatus: 'loading'
         },
         {
             id: 'todolistId2', title: 'What to buy', filter: 'all', addedDate: '',
-            order: 0
+            order: 0,entityStatus: 'loading'
         }
     ],
+    app: {
+        status: "loading",
+        error: null
+    },
     tasks: {
         ['todolistId1']: [
             {

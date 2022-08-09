@@ -8,7 +8,7 @@ export default {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistsAPI.getTodolists().then((res)=>{setState(res.data)})
+        todolistsAPI.getTodolists().then((res)=>{setState(res)})
     }, [])
     return <div> {JSON.stringify(state)}</div>
 }

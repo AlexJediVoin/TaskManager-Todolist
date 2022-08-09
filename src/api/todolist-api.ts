@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
-import {FilterValuesType, TodolistDomainType} from "../State/todolists-reducer";
+import {FilterValuesType} from "../State/todolists-reducer";
 
 const settings = {
     withCredentials: true,
@@ -77,7 +77,7 @@ export const instance = axios.create({
 
 export const todolistsAPI = {
     updateTodolist(todolistId: string, title: string) {
-        const promise = instance.put<RequestUpdateTodolistType, ResponseType>(`todo-lists/${todolistId}`, {title: title})
+        const promise = instance.put< RequestUpdateTodolistType, ResponseType,{title:string}>(`todo-lists/${todolistId}`, {title: title})
         return promise
     },
     deleteTodolist(todolistId: string) {
@@ -85,12 +85,12 @@ export const todolistsAPI = {
         return promise
     },
     getTodolists() {
-        const promise = instance.get<Array<TodolistType>>(`todo-lists/`)
+        const promise = instance.get<Array<TodolistType>>(`todo-lists/`).then(res=> res.data)
         return promise
     },
     createTodolist(title: string) {
         //const promise = instance.post<RequestCreateTodolistType, ResponseType<{item: TodolistType}>>(`todo-lists/`, {title: title})
-        const promise = instance.post<AxiosResponse<ResponseType<{ item: TodolistType }>>>(`todo-lists/`, {title: title})
+        const promise = instance.post<any,AxiosResponse<ResponseType<{ item: TodolistType }>>, {title: string}>(`todo-lists/`, {title})
         return promise
     }
 }

@@ -46,7 +46,7 @@ export type TaskType = {
     addedDate: string,
 }
 
-type ResponseGetTaskType = {
+export type ResponseGetTaskType = {
     error: null | string,
     items: TaskType[],
     totalCount: number,
@@ -65,19 +65,21 @@ export type updateTaskPayload = {
     priority: TodoTaskPriorities,
     description: string,
     deadline: string,
-    status: TaskStatuses
+    status: TaskStatuses,
+    completed: boolean
 }
 
 export const tasksAPI = {
-    updateTask(todolistId: string, taskid: string, payload: updateTaskPayload) {
-        const promise = instance.put<AxiosResponse<ResponseType<{ item: TaskType }>>>(`${todolistId}/tasks/${taskid}`,
+    updateTask(todolistId: string, taskId: string, payload: updateTaskPayload) {
+        const promise = instance.put<any,AxiosResponse<ResponseType<{ item: TaskType }>>,updateTaskPayload>(`${todolistId}/tasks/${taskId}`,
             {
                 title: payload.title,
                 startDate: payload.startDate,
                 priority: payload.priority,
                 description: payload.description,
                 deadline: payload.deadline,
-                status: payload.status
+                status: payload.status,
+                completed: payload.completed,
             }
         )
         return promise
@@ -92,7 +94,7 @@ export const tasksAPI = {
         return promise
     },
     createTask(todolistId: string, title: string) {
-        const promise = instance.post<any, AxiosResponse<ResponseType<{ item: TaskType }>>, { title: string }>(`${todolistId}/tasks`, {title: title})
+        const promise = instance.post<any, AxiosResponse<ResponseType<{ item: TaskType }>>, { title: string }>(`${todolistId}/tasks`, {title: title}).then(res=> res.data)
         return promise
     }
 }

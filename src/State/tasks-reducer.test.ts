@@ -78,16 +78,25 @@ beforeEach(() => {
         ]
     };
 })
-/*
 test('correct task should be added to correct array', () => {
-    const action = addTaskAC("juce", "todolistId2");
+    const action = addTaskAC({
+    id: "4", title: "uuuu", description: '',
+        completed: false,
+        status: TaskStatuses.New,
+        priority: TodoTaskPriorities.Low,
+        startDate: " ",
+        deadline: " ",
+        todoListId: "todolistId2",
+        order: 0,
+        addedDate: " "
+    });
 
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId1"].length).toBe(3);
     expect(endState["todolistId2"].length).toBe(4);
     expect(endState["todolistId2"][0].id).toBeDefined();
-    expect(endState["todolistId2"][0].title).toBe("juce");
+    expect(endState["todolistId2"][0].title).toBe("uuuu");
     expect(endState["todolistId2"][0].status).toBe(TaskStatuses.New);
 
 })
@@ -190,7 +199,7 @@ test('status of specified task should be changed', () => {
             },
             {id: "2", title: "JS", description: '',
                 completed: false,
-                status: TaskStatuses.New,
+                status: TaskStatuses.Completed,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -222,7 +231,7 @@ test('status of specified task should be changed', () => {
             },
             {id: "2", title: "milk", description: '',
                 completed: false,
-                status: TaskStatuses.Completed,
+                status: TaskStatuses.New,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -246,7 +255,7 @@ test('status of specified task should be changed', () => {
         "todolistId1": [
             {id: "1", title: "CSS", description: '',
                 completed: false,
-                status: TaskStatuses.New,
+                status: TaskStatuses.Completed,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -256,7 +265,7 @@ test('status of specified task should be changed', () => {
             },
             {id: "2", title: "JS", description: '',
                 completed: false,
-                status: TaskStatuses.Completed,
+                status: TaskStatuses.New,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -266,7 +275,7 @@ test('status of specified task should be changed', () => {
             },
             {id: "3", title: "React", description: '',
                 completed: false,
-                status: TaskStatuses.New,
+                status: TaskStatuses.Completed,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -278,7 +287,7 @@ test('status of specified task should be changed', () => {
         "todolistId2": [
             {id: "1", title: "bread", description: '',
                 completed: false,
-                status: TaskStatuses.New,
+                status: TaskStatuses.Completed,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -288,7 +297,7 @@ test('status of specified task should be changed', () => {
             },
             {id: "2", title: "milk", description: '',
                 completed: false,
-                status: TaskStatuses.Completed,
+                status: TaskStatuses.New,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -298,7 +307,7 @@ test('status of specified task should be changed', () => {
             },
             {id: "3", title: "tea", description: '',
                 completed: false,
-                status: TaskStatuses.New,
+                status: TaskStatuses.Completed,
                 priority: TodoTaskPriorities.Low,
                 startDate: " ",
                 deadline: " ",
@@ -321,7 +330,12 @@ test('change task title should to be correct', () => {
 
 })
 test('new array should be added when new todolist is added', () => {
-    const action = addTodolistAC("new todolist");
+    const action = addTodolistAC({
+        id: '5',
+        addedDate: '',
+        order: 0,
+        title: 'adf'
+    });
     const endState = tasksReducer(startState, action)
 
     const keys = Object.keys(endState);
@@ -345,6 +359,5 @@ test('property with todolistId should be deleted', () => {
     expect(endState["todolistId2"]).not.toBeDefined();
 });
 
-*/
 
 
