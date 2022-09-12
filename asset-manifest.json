@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/TaskManager-Todolist/static/css/main.5185e0a6.css",
+    "main.js": "/TaskManager-Todolist/static/js/main.8def24b8.js",
+    "static/media/preloader.gif": "/TaskManager-Todolist/static/media/preloader.e9202c75d969bfbffe5a.gif",
+    "index.html": "/TaskManager-Todolist/index.html",
+    "main.5185e0a6.css.map": "/TaskManager-Todolist/static/css/main.5185e0a6.css.map",
+    "main.8def24b8.js.map": "/TaskManager-Todolist/static/js/main.8def24b8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5185e0a6.css",
+    "static/js/main.8def24b8.js"
+  ]
+}
