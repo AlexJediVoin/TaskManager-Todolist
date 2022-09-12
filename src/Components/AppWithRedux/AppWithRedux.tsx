@@ -19,9 +19,10 @@ import {
 } from '../../State/tasks-reducer';
 import {TaskStatuses, TaskType} from "../../api/tasks-api";
 import {useAppDispatch, useAppSelector} from "../../State/hooks";
-
-import { Navigate} from 'react-router-dom';
-
+import {Navigate} from 'react-router-dom';
+import {initializeAppTC} from "../../State/app-reducer";
+import {AddItemForm} from "../AddItemForm/AddItemForm";
+import {LinerProgress} from "../Preloader/LinerProgress";
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -33,7 +34,7 @@ function AppWithRedux() {
     const tasks = useAppSelector(state => state.tasks);
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
     const dispatch = useAppDispatch();
-
+    const status = useAppSelector(state => state.app.status);
 
     const removeTask = useCallback(function (id: string, todolistId: string) {
         const thunk = removeTasksTC(id, todolistId);
@@ -71,42 +72,46 @@ function AppWithRedux() {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log('isLoginIn: ',isLoggedIn)
+        console.log('isLoginIn: ', isLoggedIn)
+        dispatch(initializeAppTC());
         if (isLoggedIn) {
             dispatch(fetchTodolistsTC());
             return
         }
-
-    }, [isLoggedIn]);
+    }, [dispatch, isLoggedIn]);
     if (!isLoggedIn) {
         return <Navigate to={'login'}/>
     }
-    return (<div className={styles.App}>
-                    {
-                        todolists.map(tl => {
-                            let allTodolistTasks = tasks[tl.id];
 
-                            return <Grid item key={tl.id}>
-                                <Paper style={{padding: '10px'}}>
-                                    <Todolist
-                                        id={tl.id}
-                                        title={tl.title}
-                                        tasks={allTodolistTasks}
-                                        removeTask={removeTask}
-                                        changeFilter={changeFilter}
-                                        addTask={addTask}
-                                        changeTaskStatus={changeStatus}
-                                        filter={tl.filter}
-                                        removeTodolist={removeTodolist}
-                                        changeTaskTitle={changeTaskTitle}
-                                        changeTodolistTitle={changeTodolistTitle}
-                                        entityStatus={tl.entityStatus}
-                                    />
-                                </Paper>
-                            </Grid>
-                        })
-                    }
-        </div>)
+    return (<div className={styles.App}>
+        {status === 'loading' ? <LinerProgress/> : null}
+        <AddItemForm addItem={addTodolist} disabled={false}/>
+        {
+
+            todolists.map(tl => {
+                let allTodolistTasks = tasks[tl.id];
+
+                return <Grid item key={tl.id}>
+                    <Paper style={{padding: '10px'}}>
+                        <Todolist
+                            id={tl.id}
+                            title={tl.title}
+                            tasks={allTodolistTasks}
+                            removeTask={removeTask}
+                            changeFilter={changeFilter}
+                            addTask={addTask}
+                            changeTaskStatus={changeStatus}
+                            filter={tl.filter}
+                            removeTodolist={removeTodolist}
+                            changeTaskTitle={changeTaskTitle}
+                            changeTodolistTitle={changeTodolistTitle}
+                            entityStatus={tl.entityStatus}
+                        />
+                    </Paper>
+                </Grid>
+            })
+        }
+    </div>)
 }
 
 export default AppWithRedux;

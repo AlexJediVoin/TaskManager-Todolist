@@ -21,6 +21,16 @@ export type LoginOutResponseType = {
     fieldsErrors: Array<string>
     data: {}
 }
+export type MeResponseType = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: {
+        id: string,
+        email: string,
+        login: string,
+    }
+}
 type LoginParamsType = {
     email: string,
     password: string,
@@ -45,6 +55,10 @@ export const authAPI = {
     },
     logout() {
         let promise = instance.delete<any, AxiosResponse<LoginOutResponseType>>('auth/login').then(res => res.data);
+        return promise;
+    },
+    me() {
+        let promise = instance.get<any, AxiosResponse<MeResponseType>>('auth/me').then(res => res.data);
         return promise;
     }
 }

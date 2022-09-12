@@ -15,7 +15,6 @@ import {Container} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../State/hooks";
 import {logoutTC} from "../../State/auth-reducer";
 
-
 const Initialized = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
@@ -26,6 +25,7 @@ const Initialized = () => {
     const onClickLogOut = () => {
         dispatch(logoutTC());
     }
+
     return (
         <div className={styles.App}>
             <ErrorSnackbar/>
@@ -51,6 +51,7 @@ const Initialized = () => {
                     <Route path={'login'} element={<Login/>}/>
                     <Route path="*" element={<Navigate to={'404'}/>}/>
                     <Route path="404" element={<h1>404: PAGE NOT FOUND</h1>}/>
+
                 </Routes>
                 <Grid container style={{padding: '20px'}}>
                 </Grid>
@@ -58,6 +59,7 @@ const Initialized = () => {
                 </Grid>
 
             </Container>
+
         </div>
     );
 };

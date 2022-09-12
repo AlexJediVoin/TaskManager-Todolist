@@ -1,4 +1,3 @@
-import {Dispatch} from 'redux'
 import {setAppErrorACType, setAppStatusAC, setAppStatusACType} from '../State/app-reducer'
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 import {authAPI} from "../api/auth-api";

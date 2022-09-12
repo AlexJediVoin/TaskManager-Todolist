@@ -1,3 +1,7 @@
+import {authAPI} from "../api/auth-api";
+import {AppThunk} from "./store";
+import {setIsLoggedInAC} from "./auth-reducer";
+
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 type InitialStateType = {
@@ -11,11 +15,11 @@ const initialState: InitialStateType = {
 }
 
 export type setAppStatusACType = {
-    type:'APP/SET-STATUS',
+    type: 'APP/SET-STATUS',
     status: RequestStatusType
 }
 export type setAppErrorACType = {
-    type:'APP/SET-ERROR',
+    type: 'APP/SET-ERROR',
     error: null | string
 }
 
@@ -35,9 +39,19 @@ export const appReducer = (state: InitialStateType = initialState, action: AppRe
 }
 
 export const setAppStatusAC = (status: RequestStatusType): setAppStatusACType => {
-    return ({type:'APP/SET-STATUS', status})
+    return ({type: 'APP/SET-STATUS', status})
 }
 export const setAppErrorAC = (error: null | string): setAppErrorACType => {
-    return ({type:'APP/SET-ERROR', error})
+    return ({type: 'APP/SET-ERROR', error})
 }
+
+export const initializeAppTC = (): AppThunk => (dispatch) => {
+    authAPI.me().then(res => {
+        debugger
+        if (res.resultCode === 0) {
+            dispatch(setIsLoggedInAC(true));
+        }
+    })
+}
+
 
