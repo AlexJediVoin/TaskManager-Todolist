@@ -7,6 +7,7 @@ import {v1} from "uuid";
 import {AppRootStateType, store} from "../State/store";
 import {TaskStatuses, TodoTaskPriorities} from "../api/tasks-api";
 import {appReducer, RequestStatusType} from "../State/app-reducer";
+import {authReducer} from "../State/auth-reducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
     app: appReducer,
+    auth: authReducer
 })
 
 const initialGlobalState: AppRootStateType = {
@@ -30,6 +32,9 @@ const initialGlobalState: AppRootStateType = {
     app: {
         status: "loading",
         error: null
+    },
+    auth: {
+        isLoggedIn: false
     },
     tasks: {
         ['todolistId1']: [
@@ -77,7 +82,7 @@ const initialGlobalState: AppRootStateType = {
                 description: 'New task',
                 todoListId: 'todolistId2'
             }
-        ]
+        ],
     }
 }
 // непосредственно создаём store

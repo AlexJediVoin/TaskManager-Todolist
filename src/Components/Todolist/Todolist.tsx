@@ -10,6 +10,8 @@ import {Task} from "../Task/Task";
 import {fetchTasksTC} from "../../State/tasks-reducer";
 import {useAppDispatch} from "../../State/hooks";
 import {RequestStatusType} from "../../State/app-reducer";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../State/store";
 
 
 type PropsType = {
@@ -30,6 +32,7 @@ type PropsType = {
 export const Todolist = React.memo(function (props: PropsType) {
     console.log('Todolist called')
     const dispatch = useAppDispatch();
+    const isLoggedIn = useSelector<AppRootStateType>(state => state.auth.isLoggedIn);
     const addTask = useCallback((title: string) => {
         props.addTask(title, props.id)
     }, [props.addTask, props.id])
@@ -55,8 +58,10 @@ export const Todolist = React.memo(function (props: PropsType) {
         tasksForTodolist = props.tasks.filter(t => t.status === TaskStatuses.Completed)
     }
     useEffect(() => {
-        dispatch(fetchTasksTC(props.id));
-    }, []);
+        if (isLoggedIn) {
+            dispatch(fetchTasksTC(props.id));
+        }
+    }, [isLoggedIn]);
 
     return <div>
         <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>

@@ -1,15 +1,7 @@
 import React, {useCallback, useEffect} from 'react'
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {Menu} from '@mui/icons-material';
 import styles from './AppWithRedux.module.css'
-import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {Todolist} from "../Todolist/Todolist";
 import {
     changeTodolistFilterAC,
@@ -27,8 +19,9 @@ import {
 } from '../../State/tasks-reducer';
 import {TaskStatuses, TaskType} from "../../api/tasks-api";
 import {useAppDispatch, useAppSelector} from "../../State/hooks";
-import {LinerProgress} from "../Preloader/LinerProgress";
-import {ErrorSnackbar} from "../ErrorSnackbar/ErrorSnackbar";
+
+import { Navigate} from 'react-router-dom';
+
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -38,8 +31,9 @@ function AppWithRedux() {
 
     const todolists = useAppSelector(state => state.todolists);
     const tasks = useAppSelector(state => state.tasks);
-    let status = useAppSelector(state=>state.app.status)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
     const dispatch = useAppDispatch();
+
 
     const removeTask = useCallback(function (id: string, todolistId: string) {
         const thunk = removeTasksTC(id, todolistId);
@@ -64,6 +58,7 @@ function AppWithRedux() {
     }, [dispatch]);
 
     const removeTodolist = useCallback(function (id: string) {
+        debugger;
         dispatch(deleteTodolistsTC(id));
     }, [dispatch]);
 
@@ -76,28 +71,17 @@ function AppWithRedux() {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchTodolistsTC());
-    }, []);
-    return (
-        <div className={styles.App}>
-            <ErrorSnackbar />
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
-                    </IconButton>
-                    <Typography variant="h6">
-                        News
-                    </Typography>
-                    <Button color="inherit">Login</Button>
-                </Toolbar>
-                {status === 'loading' && <LinerProgress/>}
-            </AppBar>
-            <Container fixed>
-                <Grid container style={{padding: '20px'}}>
-                    <AddItemForm addItem={addTodolist} disabled={false}/>
-                </Grid>
-                <Grid container spacing={3}>
+        console.log('isLoginIn: ',isLoggedIn)
+        if (isLoggedIn) {
+            dispatch(fetchTodolistsTC());
+            return
+        }
+
+    }, [isLoggedIn]);
+    if (!isLoggedIn) {
+        return <Navigate to={'login'}/>
+    }
+    return (<div className={styles.App}>
                     {
                         todolists.map(tl => {
                             let allTodolistTasks = tasks[tl.id];
@@ -122,10 +106,7 @@ function AppWithRedux() {
                             </Grid>
                         })
                     }
-                </Grid>
-            </Container>
-        </div>
-    );
+        </div>)
 }
 
 export default AppWithRedux;

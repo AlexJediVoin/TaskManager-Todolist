@@ -5,10 +5,14 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 import {store} from './State/store';
 import AppWithRedux from './Components/AppWithRedux/AppWithRedux';
+import {BrowserRouter} from "react-router-dom";
+import Initialized from "./features/Initialized/Initialized";
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppWithRedux/>
+        <BrowserRouter>
+            <Initialized/>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root'));
 
